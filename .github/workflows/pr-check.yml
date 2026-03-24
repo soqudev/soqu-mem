@@ -26,7 +26,7 @@ jobs:
 
       - name: Verify PR links an issue
         if: steps.meta.outputs.skip_policy != 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const body = context.payload.pull_request.body || '';
@@ -46,7 +46,7 @@ jobs:
 
       - name: Verify linked issue is approved
         if: steps.meta.outputs.skip_policy != 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -97,7 +97,7 @@ jobs:
 
       - name: Verify PR has a type label
         if: steps.meta.outputs.skip_policy != 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
