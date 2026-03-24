@@ -37,15 +37,17 @@ Once the issue is approved:
 
 ### Step 4: Automated PR Checks
 
-Five checks run automatically on every PR:
+Several checks run on every PR:
 
-#### PR Validation
+#### PR Validation (`pr-policy`)
 
-| Check | What it verifies |
-|-------|-----------------|
-| **Check Issue Reference** | PR body contains `Closes #N`, `Fixes #N`, or `Resolves #N` |
-| **Check Issue Has status:approved** | The linked issue has the `status:approved` label |
-| **Check PR Has type:* Label** | PR has exactly one `type:*` label |
+| Step | What it verifies |
+|------|------------------|
+| Issue reference | PR body contains `Closes #N`, `Fixes #N`, or `Resolves #N` |
+| Issue approved | The linked issue has the `status:approved` label |
+| Type label | PR has exactly one `type:*` label |
+
+**Dependency bots:** PRs opened by `dependabot[bot]` or `renovate[bot]` skip these human-oriented rules (they do not carry issue links or manual labels). CI still runs on those PRs.
 
 #### CI Tests
 
@@ -54,9 +56,13 @@ Five checks run automatically on every PR:
 | **Unit Tests** | `go test ./...` — all tests except those tagged with `//go:build e2e` |
 | **E2E Tests** | `go test -tags e2e ./internal/server/...` — end-to-end integration tests |
 
-All five checks must pass before a PR can be merged.
+All required checks must pass before a PR can be merged.
 
-> **Repo admin note:** Set these as required status checks in branch protection rules for `main`: `Unit Tests`, `E2E Tests`, and `PR Validation`.
+> **Repo admin note:** Set as required status checks on `main`: `Unit Tests`, `E2E Tests`, and **PR policy (issue + labels)** (workflow *PR Validation*).
+
+### Maintainer: releases and Homebrew
+
+The workflow [.github/workflows/release.yml](.github/workflows/release.yml) runs GoReleaser on version tags. Publishing to an external Homebrew tap requires a repository secret **`HOMEBREW_TAP_TOKEN`** (PAT with `repo` scope on the tap repo). If the secret is missing, configure it under **Settings → Secrets and variables → Actions** or temporarily adjust the release workflow until the tap is ready.
 
 ---
 

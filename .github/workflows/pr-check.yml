@@ -5,11 +5,23 @@ on:
     types: [opened, edited, labeled, unlabeled, synchronize]
 
 jobs:
-  check-issue-reference:
-    name: Check Issue Reference
+  pr-policy:
+    name: PR policy (issue + labels)
     runs-on: ubuntu-latest
     steps:
+      - name: Detect dependency bots
+        id: meta
+        run: |
+          LOGIN='${{ github.event.pull_request.user.login }}'
+          if [ "$LOGIN" = "dependabot[bot]" ] || [ "$LOGIN" = "renovate[bot]" ]; then
+            echo "skip_policy=true" >> "$GITHUB_OUTPUT"
+            echo "Skipping human PR policy for bot: $LOGIN"
+          else
+            echo "skip_policy=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Verify PR links an issue
+        if: steps.meta.outputs.skip_policy != 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -28,12 +40,8 @@ jobs:
               core.info(`✅ Found issue reference(s): #${issueNumbers}`);
             }
 
-  check-issue-approved:
-    name: Check Issue Has status:approved
-    runs-on: ubuntu-latest
-    needs: check-issue-reference
-    steps:
       - name: Verify linked issue is approved
+        if: steps.meta.outputs.skip_policy != 'true'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -83,11 +91,8 @@ jobs:
               core.setFailed('❌ Linked issue(s) not approved:\n' + failures.join('\n'));
             }
 
-  check-type-label:
-    name: Check PR Has type:* Label
-    runs-on: ubuntu-latest
-    steps:
       - name: Verify PR has a type label
+        if: steps.meta.outputs.skip_policy != 'true'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
