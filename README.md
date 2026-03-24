@@ -1,8 +1,4 @@
 <p align="center">
-  <img width="1024" height="340" alt="image" src="https://github.com/user-attachments/assets/32ed8985-841d-49c3-81f7-2aabc7c7c564" />
-</p>
-
-<p align="center">
   <strong>soqu-mem — Persistent memory for AI coding agents</strong><br>
   <em>Agent-agnostic. Single binary. Zero dependencies.</em>
 </p>
@@ -93,13 +89,6 @@ Full tool reference → [docs/ARCHITECTURE.md#mcp-tools](docs/ARCHITECTURE.md#mc
 ```bash
 soqu-mem tui
 ```
-
-<p align="center">
-<img src="assets/tui-dashboard.png" alt="TUI Dashboard" width="400" />
-  <img width="400" alt="image" src="https://github.com/user-attachments/assets/0308991a-58bb-4ad8-9aa2-201c059f8b64" />
-  <img src="assets/tui-detail.png" alt="TUI Observation Detail" width="400" />
-  <img src="assets/tui-search.png" alt="TUI Search Results" width="400" />
-</p>
 
 **Navigation**: `j/k` vim keys, `Enter` to drill in, `/` to search, `Esc` back. Catppuccin Mocha theme.
 
