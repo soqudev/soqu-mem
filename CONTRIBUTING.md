@@ -47,7 +47,7 @@ Several checks run on every PR:
 | Issue approved | The linked issue has the `status:approved` label |
 | Type label | PR has exactly one `type:*` label |
 
-**Dependency bots:** PRs opened by `dependabot[bot]` or `renovate[bot]` skip these human-oriented rules (they do not carry issue links or manual labels). CI still runs on those PRs.
+**Dependency bots:** PRs where the author is a GitHub **Bot** (including Dependabot as `dependabot[bot]` or `app/dependabot`, and Renovate) skip these human-oriented rules. CI still runs on those PRs.
 
 #### CI Tests
 

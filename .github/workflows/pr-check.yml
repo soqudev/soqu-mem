@@ -12,10 +12,14 @@ jobs:
       - name: Detect dependency bots
         id: meta
         run: |
+          TYPE='${{ github.event.pull_request.user.type }}'
           LOGIN='${{ github.event.pull_request.user.login }}'
-          if [ "$LOGIN" = "dependabot[bot]" ] || [ "$LOGIN" = "renovate[bot]" ]; then
+          # Dependabot may appear as dependabot[bot] or app/dependabot; Renovate as renovate[bot].
+          if [ "$TYPE" = "Bot" ] || \
+             [ "$LOGIN" = "dependabot[bot]" ] || [ "$LOGIN" = "app/dependabot" ] || \
+             [ "$LOGIN" = "renovate[bot]" ]; then
             echo "skip_policy=true" >> "$GITHUB_OUTPUT"
-            echo "Skipping human PR policy for bot: $LOGIN"
+            echo "Skipping human PR policy for bot: $LOGIN (type=$TYPE)"
           else
             echo "skip_policy=false" >> "$GITHUB_OUTPUT"
           fi
