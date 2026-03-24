@@ -1,0 +1,27 @@
+# CODEOWNERS — Automatic review requests
+#
+# These paths route review requests to the right people.
+# Format: <pattern> <@user or @org/team>
+#
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything not matched below
+*                              @soqudev
+
+# Core store and server — highest sensitivity
+internal/store/                @soqudev
+internal/server/               @soqudev
+
+# CLI surface — user-facing, needs careful review
+cmd/                           @soqudev
+
+# GitHub infrastructure — workflows and templates
+.github/                       @soqudev
+
+# Skills — these ship as agent instructions to users
+skills/                        @soqudev
+
+# Release and build config — changes affect all platforms
+.goreleaser.yaml               @soqudev
+go.mod                         @soqudev
+go.sum                         @soqudev

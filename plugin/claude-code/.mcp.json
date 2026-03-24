@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "soqu-mem": {
+      "command": "soqu-mem",
+      "args": ["mcp", "--tools=agent"]
+    }
+  }
+}

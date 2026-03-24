@@ -1,0 +1,11 @@
+{
+  "name": "soqu-mem",
+  "description": "Persistent memory for AI coding agents. Survives across sessions and compactions.",
+  "version": "0.1.0",
+  "author": {
+    "name": "SOQU"
+  },
+  "homepage": "https://github.com/soqudev/soqu-mem",
+  "repository": "https://github.com/soqudev/soqu-mem",
+  "license": "MIT"
+}
